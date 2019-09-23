@@ -82,10 +82,7 @@ library(transformr)
 dengue_gif <- data_longer %>%
   group_by(Province, year) %>%
   summarise(mean_cases = mean(cases)) %>%
-  ggplot(aes(x = year, y = mean_cases, group=1)) +   geom_path(size = 1, color = "green") + theme(axis.text.x = element_text(angle = 90)) + facet_wrap(~Province, nrow = 3) + geom_area(alpha=0.4)+ scale_y_continuous(limits=c(0,320)) + transition_reveal(as.integer(year)) + labs(title = 'Dengue cases in Nepal by Province',x="Year (in B.S.)", y= "Mean cases", caption = "Source: Government of Nepal, EDCD Division")
-
-dengue_gif
-
+  ggplot(aes(x = year, y = mean_cases, group=1)) +   geom_path(size = 1, color = "green") + theme(axis.text.x = element_text(angle = 90)) + facet_wrap(~Province, nrow = 3) + geom_area(alpha=0.4)+ scale_y_continuous(limits=c(0,320)) + transition_reveal(as.integer(year)) + labs(title = 'Dengue cases in Nepal by Province',x="Year (in B.S.)", y= "Mean cases", caption = "Data source: Government of Nepal, EDCD Division")
 
 ```
 
@@ -97,7 +94,7 @@ dengue_gif
 
 ```{r}
 
-animate(dengue_gif, height = 700, width =900)
+animate(dengue_gif, height = 600, width =800)
 anim_save("dengue.gif")
 
 ```
