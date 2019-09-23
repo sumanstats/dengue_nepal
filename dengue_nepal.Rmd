@@ -1,0 +1,117 @@
+---
+title: "Animation of dengue cases in Nepal"
+author: "Dr Suman Khanal"
+date: "9/22/2019"
+output: html_document
+---
+
+
+#Set knitr options
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+#Load packages
+
+```{r}
+library(tidyverse)
+library(gganimate)
+library(readxl)
+library(transformr)
+```
+
+#Load data with purrr and readxl
+
+```{r}
+path="./data/dengue_np.xlsx"
+
+province_df <- path %>% excel_sheets() %>% set_names() %>% map_df(read_excel,path=path,.id="Province")
+```
+
+
+#See the data
+
+```{r}
+province_df
+```
+
+
+
+#See the variables of dataframe
+
+```{r}
+names(province_df)
+```
+
+
+
+
+```{r}
+data_longer <- province_df %>% pivot_longer(
+  cols=3:9,
+  names_to = "year",
+  values_to = "cases"
+)
+
+data_longer
+```
+
+
+# Visualise dengue cases by year in each province
+
+
+
+
+
+```{r}
+data_longer %>% group_by (Province,year) %>% summarise(mean_cases=sum(cases)) 
+```
+
+
+
+
+
+```{r}
+
+library(gganimate)
+library(magick)
+library(transformr)
+
+dengue_gif <- data_longer %>%
+  group_by(Province, year) %>%
+  summarise(mean_cases = mean(cases)) %>%
+  ggplot(aes(x = year, y = mean_cases, group=1)) +   geom_path(size = 1, color = "green") + theme(axis.text.x = element_text(angle = 90)) + facet_wrap(~Province, nrow = 3) + geom_area(alpha=0.4)+ scale_y_continuous(limits=c(0,320)) + transition_reveal(as.integer(year)) + labs(title = 'Dengue cases in Nepal by Province',x="Year (in B.S.)", y= "Mean cases", caption = "Source: Government of Nepal, EDCD Division")
+
+dengue_gif
+
+
+```
+
+
+
+
+
+
+
+```{r}
+
+animate(dengue_gif, height = 700, width =900)
+anim_save("dengue.gif")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
