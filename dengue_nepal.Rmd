@@ -27,7 +27,9 @@ library(transformr)
 ```{r}
 path="./data/dengue_np.xlsx"
 
-province_df <- path %>% excel_sheets() %>% set_names() %>% map_df(read_excel,path=path,.id="Province")
+province_df <- path %>% excel_sheets() %>% 
+                        set_names() %>% 
+                        map_df(read_excel,path=path,.id="Province")
 ```
 
 
@@ -82,7 +84,14 @@ library(transformr)
 dengue_gif <- data_longer %>%
   group_by(Province, year) %>%
   summarise(mean_cases = mean(cases)) %>%
-  ggplot(aes(x = year, y = mean_cases, group=1)) +   geom_path(size = 1, color = "green") + theme(axis.text.x = element_text(angle = 90)) + facet_wrap(~Province, nrow = 3) + geom_area(alpha=0.4)+ scale_y_continuous(limits=c(0,320)) + transition_reveal(as.integer(year)) + labs(title = 'Dengue cases in Nepal by Province',x="Year (in B.S.)", y= "Mean cases", caption = "Data source: Government of Nepal, EDCD Division")
+  ggplot(aes(x = year, y = mean_cases, group=1)) +   
+  geom_path(size = 1, color = "green") + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  facet_wrap(~Province, nrow = 3) + 
+  geom_area(alpha=0.4) + 
+  scale_y_continuous(limits=c(0,320)) + 
+  transition_reveal(as.integer(year)) + 
+  labs(title = 'Dengue cases in Nepal by Province',x="Year (in B.S.)", y= "Mean cases", caption = "Data source: Government of Nepal, EDCD Division")
 
 ```
 
