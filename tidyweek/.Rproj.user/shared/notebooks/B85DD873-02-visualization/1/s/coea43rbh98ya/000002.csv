@@ -1,0 +1,2 @@
+"0","# saves the plot to working directory"
+"0","ggsave(""myplot.png"", plot = myplot , width =  6, height = 6, units = ""in"", dpi = ""retina"")"

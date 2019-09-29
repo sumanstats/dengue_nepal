@@ -1,0 +1,2 @@
+"0","ggplot(data = bechdel) +"
+"0","  geom_boxplot(mapping = aes(y = intgross ))"

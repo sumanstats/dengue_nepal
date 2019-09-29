@@ -1,0 +1,22 @@
+"0","library(readr)"
+"0","library(tidyverse)"
+"0","heart <- read_csv(""./data/heart_disease.csv"")"
+"2","Parsed with column specification:
+cols(
+  patient_id = [31mcol_character()[39m,
+  slope_peak_exercise = [32mcol_double()[39m,
+  thal_test = [31mcol_character()[39m,
+  resting_blood_pressure = [32mcol_double()[39m,
+  chest_pain_type = [32mcol_double()[39m,
+  num_major_vessels = [32mcol_double()[39m,
+  fasting_blood_sugar = [32mcol_double()[39m,
+  resting_ekg_results = [32mcol_double()[39m,
+  serum_cholesterol = [32mcol_double()[39m,
+  oldpeak_eq_st = [32mcol_double()[39m,
+  sex = [31mcol_character()[39m,
+  age = [32mcol_double()[39m,
+  max_heart_rate = [32mcol_double()[39m,
+  exercise_induced_angina = [31mcol_character()[39m,
+  heart_disease = [31mcol_character()[39m
+)
+"

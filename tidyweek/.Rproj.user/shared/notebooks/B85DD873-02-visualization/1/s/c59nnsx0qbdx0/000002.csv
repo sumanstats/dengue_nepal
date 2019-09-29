@@ -1,0 +1,5 @@
+"0","# shape is set to clean_test"
+"0","ggplot(bechdel) +"
+"0","  geom_point(aes(x = budget,"
+"0","                 y = domgross,"
+"0","                 shape = clean_test))"

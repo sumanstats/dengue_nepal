@@ -1,0 +1,7 @@
+"0","table_b <- table4b %>% pivot_longer(cols=2:3,"
+"0","                                    names_to = ""year"","
+"0","                                    values_to = ""population"")"
+"0",""
+"0",""
+"0",""
+"0","table_b"

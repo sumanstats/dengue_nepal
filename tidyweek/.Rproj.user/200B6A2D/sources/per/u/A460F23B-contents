@@ -1,0 +1,28 @@
+moment <- function(y,n) {
+  y_bar <- mean(y)
+  return (sum((y - y_bar)**n)/length(y))
+}
+  #num <- (sum(y-y_bar))**3
+  #denom <- sqrt()
+
+moment <- function(y) {
+  y_bar <- mean(y)
+  num <- sum((y - y_bar)**3)/(sd(y)**3)
+  second_val <- num/(length(y)-1)
+  return (second_val)
+}
+
+
+simul <- c(25,25, 75,75, 75, 125,125,125,125,125, 175,
+           175,175,175,175,175,225, 225, 225, 225)
+moment(simul)
+
+z_value <- function(y) {
+  return ((y-mean(y))/sd(y))
+}
+
+moment(faithful$eruptions)
+
+m2 <- moment(faithful$eruptions,2)
+
+m3/sqrt(m2**3)

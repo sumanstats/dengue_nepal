@@ -1,0 +1,578 @@
+
+title: "03-Statistics"
+author: "RNepal"
+date: "9/22/2019"
+output: html_document
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#setup
+
+```{r}
+library(readr)
+library(tidyverse)
+heart <- read_csv("./data/heart_disease.csv")
+```
+
+# About Data
+
+* slope_of_peak_exercise_st_segment (type: int): the slope of the peak exercise ST segment, an electrocardiography read out indicating quality of blood flow to the heart
+
+* thal (type: categorical): results of thallium stress test measuring blood flow to the heart, with possible values normal, fixed_defect, reversible_defect
+
+* resting_blood_pressure (type: int): resting blood pressure
+
+* chest_pain_type (type: int): chest pain type (4 values)
+
+* num_major_vessels (type: int): number of major vessels (0-3) colored by flourosopy
+
+* fasting_blood_sugarl (type: binary): fasting blood sugar > 120 mg/dl
+
+* resting_ekg_results (type: int): resting electrocardiographic results (values 0,1,2)
+
+* serum_cholesterol (type: int): serum cholestoral in mg/dl
+
+* oldpeak_eq_st (type: float): oldpeak = ST depression induced by exercise relative to rest, a measure of abnormality in electrocardiograms
+
+* sex (type: binary):  female, male
+
+* age (type: int): age in years
+
+* max_heart_rate_achieved (type: int): maximum heart rate achieved (beats per minute)
+
+* exercise_induced_angina (type: binary): exercise-induced chest pain (No, Yes)
+
+# Statistical Terms
+
+* Population: total set of observations
+
+* Sample: Portion of Population
+
+* Observations: measure or count during a study or experiment
+
+* Variables: characteristics or quantity that can be counted 
+
+
+
+
+
+
+
+# Types of Data
+
+* Numeric : have discrete or continous data (1,2,3,4,5)
+* Categorical: data are categories or non-numeric data (TRUE/FALSE, low/middle/high )
+
+
+# Type of Stat
+
+* Descriptive 
+* Inferential
+
+
+# Descriptive Stat
+
+* summarizes the data
+* focuse on distribution, central tendancy and dispersion of the data
+
+
+# Central Tendancy 
+A measure of central tendency is a single value that attempts to describe a set of data by identifying the central position within that set of data.
+
+* Mean
+* Median
+* Mode
+
+
+# Mean
+
+* Average of the given data
+
+```{r average of the patient}
+mean(heart$age)
+```
+
+
+
+# Median
+
+* Middle point of the data
+* 50 percentile of the data 
+```{r median age of the patient}
+median(heart$age)
+```
+
+
+# Mode
+
+* Value with highest frequency
+```{r mode of the thal}
+# function for finding mode value
+mode_find <- function(data){
+  # counts the value
+  count <- table(data)
+  # find the value with maximum frequency
+  mode_value <- names(count)[which(count == max(count))]
+  return(mode_value)
+}
+mode_find(heart$thal_test)
+```
+
+
+# Your Turn 1
+
+* find the mean and median of the serum_cholesterol
+* find the mode of chest_pain_type
+
+
+
+```{r}
+mean(heart$serum_cholesterol)
+```
+
+```{r}
+median(heart$serum_cholesterol)
+```
+
+
+```{r}
+mode_find(heart$chest_pain_type)
+```
+
+
+class:top, left
+# Range
+
+
+* Difference between the largest and smallest points in the data
+* range()  is used.
+
+```{r echo=TRUE}
+range(heart$age)
+```
+
+
+* min() and max() can also be used to find Range.
+
+```{r range of the max_heart_rate, echo=TRUE}
+min(heart$max_heart_rate)
+max(heart$max_heart_rate)
+```
+
+
+
+
+
+# Interquartile range
+
+* Measure of difference between 75 Percentile (3rd quartile) and 25 Percentile ( 1st quartile)
+* IQR() is used 
+
+```{r IQR of the Patient age}
+IQR(heart$age)
+```
+
+
+# Quartile
+
+* Quartiles are the values that divide a list of numbers into quarters.
+* quantile() is used
+
+```{r}
+quantile(heart$resting_blood_pressure)
+```
+
+
+# Your Turn 2
+
+* find range and IQR of the serum_cholesterol
+* find range and IQR of the max_heart_rate
+
+
+```{r}
+
+range(heart$serum_cholesterol)
+```
+
+```{r}
+
+IQR(heart$serum_cholesterol)
+```
+
+
+
+ range and IQR of the max_heart_rate
+```{r}
+
+range(heart$max_heart_rate)
+```
+
+```{r}
+print("inter quartile range:")
+IQR(heart$max_heart_rate)
+```
+
+
+
+# Variance 
+
+* Average of squared difference from the mean 
+* Used to measure the spreadness of the data
+* var() is used
+
+```{r variance of the resting_blood_pressure}
+var(heart$resting_blood_pressure)
+```
+
+
+# Standard Deviation
+
+* Square root of variance & measures spread of the data
+* Easier to apply than variance 
+* sd() is used.
+
+```{r standard deviation of the resting_blood_pressure}
+sd(heart$resting_blood_pressure)
+```
+
+
+# Your Turn 3
+
+* find variance and standard deviation of age
+* find variance and standard deviation of serum_cholesterol
+
+
+
+
+# variance and standard deviation of age
+
+```{r}
+var(heart$age)
+sd(heart$age)
+```
+
+
+## variance and standard deviation of serum_cholesterol
+```{r}
+var(heart$serum_cholesterol)
+sd(heart$serum_cholesterol)
+```
+
+
+
+# Normal Distribution
+
+* symmetric distribution where most of the observations cluster around the central peak
+* Bell Shaped curve/ Gaussian distribution
+
+
+
+
+
+# Normal Distribution
+
+```{r Histogram of the patient age,message=FALSE, warning=FALSE}
+ggplot(heart,aes(x = age))+
+  geom_histogram()
+```
+
+
+```{r Density Plot of the patient age,message=FALSE, warning=FALSE}
+ggplot(heart,aes(x = age))+
+  geom_density()
+```
+
+# Normal Distribution
+
+```{r}
+qqnorm(heart$age)
+qqline(heart$age)
+```
+
+# Shapiro Test
+
+* p-value more than 0.05 conclude data is normally distributed.
+
+```{r}
+shapiro.test(heart$age)
+```
+
+* age is normally distributed
+
+
+# Your Turn 4
+
+* Is resting_blood_pressure Normally Distributed?
+* Is max_heart_rate Normally Distributed?
+
+
+```{r}
+ggplot(heart,aes(x = resting_blood_pressure ))+
+  geom_density()
+```
+
+
+
+```{r}
+qqnorm(heart$resting_blood_pressure)
+qqline(heart$resting_blood_pressure)
+```
+
+```{r}
+shapiro.test(heart$resting_blood_pressure)
+```
+
+# Skewness
+
+* measure of how symmetric a distribution is
+* how much the distribution is different from the normal distribution
+* moderately skewed: -1 to -0.5 and 0.5 to 1
+* Approximately symmetric: -0.5 to 0.5
+
+```{r}
+#library(moments)
+#skewness(heart$max_heart_rate)
+```
+
+The max_heart_rate is skewed to the left.
+
+
+
+
+# Kurtosis
+* measure that defines how heavily the tails of a distribution differ from the tails of a normal distribution
+* define whether the tails of a given distribution contain extreme values
+
+```{r}
+#kurtosis(heart$age)
+```
+
+The distribution of age is platykurtic as the  computed value is less than 3.
+
+# summary()  and str()
+
+* summary() gives the basic statistic of the data.
+* str() gives the structure of the data.
+
+
+
+
+
+### Summary
+```{r}
+summary(heart)
+```
+
+
+
+### str
+
+```{r}
+str(heart)
+```
+
+
+
+
+
+# Inferential Statistics
+
+* Describes and make inferences about the population and the sampled data
+* hypothesis testing
+* estimating of parameters
+
+
+# Hypothesis testing
+
+* a research
+question is a hypothesis asked in question format
+* question : "Does Women multitask better than men? "
+* hypothesis : "There
+is a significant difference between the women and men in multitasking."
+* evaluates two mutually exclusive statements
+
+
+# Null and Alternate Hypothesis
+* Null Hypothesis : "Women does not multitask better than men."
+* Null Hypothesis denoted by Ho
+
+
+* Alternate Hypothesis :"Women multitask better than men."
+* Alternate Hypothesis denoted by H1
+
+* if p-value is greater than 0.05 ,accept null hypothesis.
+* smaller p-value means that there is stronger evidence in favor of the alternative hypothesis
+
+
+### Types of Errors in Hypothesis Testing
+
+* type I error is a rejection of the null hypothesis when it is really true.
+* type II error is a failure to reject a null hypothesis that is false
+
+
+
+# T- Test 
+
+* used to determine whether the mean between two data points or samples are
+equal to each other
+
+### One Sample T-Test
+
+* one-sample t-test is used to test whether the mean of a population is
+equal to a specified mean
+* Question :Is the mean of the Resting blood pressure is equal to specified mean suppose 120?
+* Null Hypothesis : There is no difference between the resting blood pressure  mean  and specified mean.
+* Alternative Hypothesis :  There is significant difference between the mean of the resting blood pressure mean nd specified mean.
+
+
+```{r}
+ttest_max_heart <-t.test(heart$resting_blood_pressure, mu = 120)
+ttest_max_heart
+```
+
+As the p-value is less than 0.05 threshold . We can reject null hypothesis at 95% confidence interval. 
+There is significant difference between the mean resting blood pressure and the specified one.
+
+
+# Your Turn 5
+* Is the mean of the Max Heart Beat is equal to specified mean suppose 90?
+
+```{r}
+t.test(heart$max_heart_rate , mu = 90 )
+```
+
+
+# Two-Sample Independent T-Test
+
+
+*  two compare two means of mutually exclusive group( Male / Female)
+
+* Is there significant difference between the mean of  male  age and mean of female age ?
+* Null: There no significant difference between the mean of male age and female age.
+
+* Alternate: There is significant difference between the mean of male age and female age.
+
+
+```{r}
+# extract the male and female data 
+male_max<- heart %>% filter(sex == "male")
+female_max <- heart %>% filter(sex == "female")
+t.test(male_max$age,female_max$age, var.equal = TRUE, paired = FALSE)
+```
+
+
+* As the  p-value = 0.4719 is greater than 0.05 .We accept the null hypothesis.
+* There no significant difference between the mean of .blueb[male age] and .pink female age.
+
+
+# Your Turn 6
+
+* Compare mean male and female max_heart_rate
+```{r}
+male_max_heart<- heart %>% filter(sex == "male")
+female_max_heart <- heart %>% filter(sex == "female")
+t.test(male_max_heart$max_heart_rate,female_max_heart$max_heart_rate, var.equal = TRUE, paired = FALSE)
+```
+
+
+# Two Sample Dependent T-Test
+
+* Used  to  compare two means of two dependent samples.
+* Any effect or difference before interventional program and after interventional program.
+
+```{r}
+# creating random data 
+set.seed(123);
+before <- rnorm(100, mean=2, sd=1);
+after <- rnorm(100, mean=3, sd=1);
+
+data <- data.frame(before, after);
+t.test(data$before, data$after, paired=TRUE);
+```
+
+* As the  p-value = 0.4719 is greater than 0.05. We reject the null hypothesis.
+* There is  significant difference between the mean of before and after intervation.
+
+# Chi Square test
+* used to compare the relationships between two categorical variables
+
+# Contingency Test
+
+* Used to compare relationship between two categorical variables
+* Is there association between chest_pain_type and heart_disease ?
+* null: There is no association between chest_pain_type and heart_disease.
+* alternate: There is association between chest_pain_type and heart_disease.
+
+```{r}
+chisq_chest_heart <- chisq.test(heart$chest_pain_type, heart$heart_disease)
+chisq_chest_heart
+```
+
+```{r}
+library(broom)
+library(knitr)
+chisq_chest_heart$observed %>% kable()
+```
+
+If the the value in any cell of the observation is less than 5 equal to 5. Use Fisher test.
+
+```{r}
+fisher.test(heart$chest_pain_type, heart$heart_disease)
+```
+
+As, p-value is less than 0.05 , Null hypothesis is rejected.There is association between chest_pain_type and heart_disease.
+
+
+
+
+# Your Turn 7
+* Is there association between sex and heart_disease?
+
+
+
+```{r}
+chisq.test(heart$sex, heart$heart_disease)
+```
+
+
+
+
+# Correlation
+
+* define how close two variables are 
+* range between (-1 to +1)
+
+
+```{r correlation of the patient age and heart_disease}
+cor(heart$age,heart$max_heart_rate)
+```
+
+
+
+# Your Turn 8
+
+* find the correlation between resting_blood_pressure and max_heart_rate
+* find the correlation between serum_cholesterol and age
+
+```{r}
+cor(heart$resting_blood_pressure, heart$max_heart_rate)
+```
+
+
+```{r}
+# correlation between resting_blood_pressure and max_heart_rate
+cor(heart$resting_blood_pressure,heart$max_heart_rate)
+```
+
+```{r}
+# correlation between serum_cholesterol and age
+cor(heart$serum_cholesterol, heart$age)
+```
+
+```{r}
+ggplot(heart) + geom_point((aes(x=age, y=max_heart_rate))) + geom_smooth(aes(x=age, y=max_heart_rate),method=lm,se=FALSE)
+```
+

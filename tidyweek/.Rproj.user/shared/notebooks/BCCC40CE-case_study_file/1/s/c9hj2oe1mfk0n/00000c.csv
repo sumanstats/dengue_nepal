@@ -1,0 +1,4 @@
+"0",""
+"0","highest_cases_2070 <- mapdf_purrr %>% filter(year==2070) %>% arrange(desc(cases))"
+"0",""
+"0","head(highest_cases_2070)"

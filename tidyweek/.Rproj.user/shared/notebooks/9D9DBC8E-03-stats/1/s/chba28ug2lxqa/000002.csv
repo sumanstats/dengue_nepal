@@ -1,0 +1,1 @@
+"0","ggplot(heart) + geom_point((aes(x=age, y=max_heart_rate))) + geom_smooth(aes(x=age, y=max_heart_rate),method=lm,se=FALSE)"

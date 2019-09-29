@@ -1,0 +1,7 @@
+"0","## %>%  <------- Ctrl + Alt + m  (Keyboard shortcut)"
+"0",""
+"0","country_gdp_year <- gapminder %>% select(year, country, gdpPercap)"
+"0","  "
+"0","  "
+"0","# Displays data, so don't remove them below as well"
+"0","country_gdp_year"

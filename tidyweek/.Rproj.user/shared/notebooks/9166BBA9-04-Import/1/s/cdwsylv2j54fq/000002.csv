@@ -1,0 +1,5 @@
+"0","save(   women   , file = ""./data/women.rda"")"
+"0","saveRDS(  women  , ""./data/women.rds"")"
+"0","write_csv(  women  , ""./data/women.xls"")"
+"0","write_sav(  women   , ""./data/women.sav"")"
+"0","write_dta(   women   , ""./data/women.dta"")"

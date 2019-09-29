@@ -1,0 +1,578 @@
+---
+title: "1_BasicR"
+author: "RNepal"
+date: "9/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Basic Syntax
+
+* Assign value to a variable using <- operator
+* Assigned a number to the variable but  can assign many type of data types
+```{r Basic syntax}
+num <- 123
+print(num)
+
+alp <- "abc"
+print(alp)
+```
+
+# Comment
+
+* Comments are  helping text in  R program
+* Ignored by the interpreter while executing your actual program. 
+* Written using .green[#] in the begining of the statement. 
+* Write comments as it help to make code readable ,reuseable.
+
+
+```{r}
+# assign 1 to a
+a <- 1
+a
+```
+
+
+# Your Turn 1
+
+* Assign some number to num1 variable and print out.
+* Assign alphabet to alpha1 variable and print out.
+* Dont forget to write some comments.
+
+```{r}
+# Assign number to num1
+num1 <- 345
+print(num1)
+
+# Assign number to alpha1
+alpha1 <- "abcd"
+alpha1
+```
+
+
+# Variable Naming Convention
+
+```{r}
+my_data <- 234 # correct
+my_data_1 <- 456
+my_data_2 <- 345 # in correct
+```
+
+```{r}
+mydata <- 234
+MyData <- 567 
+print(mydata)
+print(MyData)
+```
+
+```{r}
+data()
+```
+
+# Data Types
+
+* types or kind of information or data a variable is
+holding
+* class() function is used to determine the datatype of variable 
+
+Logical : TRUE /FALSE 
+Numeric : 123, 23.4, 345
+Character: "a","abc","This is a ball."
+
+# Data Types
+
+```{r}
+class(a)
+```
+
+```{r}
+class(alp)
+```
+
+```{r}
+class(mydata)
+```
+
+# Your Turn 2
+
+* Find the data type of the variable you defined in Your Turn 1
+
+# Data Structures
+Data Structure are the R Objects that is used to store some kind of data.
+
+* Vectors
+* Lists
+* Matrices
+* Arrays
+* Factors
+* Data Frames
+
+
+# Vector
+
+* Vector is collection of same type of values
+* created using c() function
+
+```{r}
+# create new vector
+
+vec1 <- c(1,2,3)
+vec1
+```
+
+```{r}
+class(vec1)
+```
+
+```{r}
+vec2 <- c("ram","shyam",1)
+vec2
+```
+
+```{r}
+class(vec2)
+```
+
+
+# Your Turn 3
+
+* create a new vector
+* find the datatype of vector
+
+```{r}
+# create a new vector 
+new_vec <- c(1,2,3)
+
+# find the class of vector
+class(new_vec)
+```
+
+
+# Operators
+
+## Arthmetic Operators
+
+Operator | Meaning
+-------- | -------
++ or - | Add or Subtract
+* | Multiplication
+/ | Division
+^ | Exponent
+%% | Modulus
+
+## Addition
+```{r Addition}
+#Addition
+a <- c(5,6,7)
+b <- c(2,1,3)
+print(a - b)
+```
+
+
+## subtraction
+```{r subtraction}
+#subtraction
+a <- c(9,8,7)
+b <- c(2,4,9)
+print(a - b)
+```
+
+## Multiply
+```{r Multiplication}
+# Multiply
+a <- c(1,2,3)
+b <- c(2,3,4)
+print(a*b)
+```
+
+## Division
+```{r Division}
+# Division
+a <- c(22,13,24)
+b <- c(2,3,4)
+print(a/b)
+```
+
+## Exponent
+```{r}
+4 ^ 2
+```
+
+```{r}
+99 ^ 3
+```
+
+## Modulus
+
+```{r}
+7 %% 2
+```
+```{r}
+99 %% 8
+```
+
+# Relational Operators
+
+* operators  used to compare two elements or vectors.
+* compare vector a with vector b.
+
+
+
+Operator | Definition
+-------- | ---------
+==       | Equal to  
+>=       | Greater than or equal to
+<=       | Lesser than or equal to
+>        | Greater than
+<        | Lesser than
+!=       | Not equal to
+
+# Greater than ( > )
+```{r}
+# greater than
+
+a = c(5,2,3,4)
+b = c(10,1,2,9)
+print(a > b)
+```
+
+
+
+# Less Than ( < )
+```{r}
+#less than 
+a <- c(9,10,11,21)
+b <- c(11,2,3,55)
+print(a<b)
+```
+
+# Equals to ( == )
+```{r}
+#equals to
+
+a <- c(2,3,4)
+b <- c(2,3,5)
+print(a == b)
+```
+
+# NotEqual ( != )
+```{r}
+# notequal to
+a <- c(2,3,4,10)
+b <- c(1,3,4,9)
+print(a!=b)
+```
+
+
+# Less than equal to
+```{r}
+#less than equal to
+a <- c(2,3,4,9)
+b <- c(2,5,7,8)
+print(a<=b)
+```
+
+
+# Greater than equal to
+```{r}
+# greater than equal to
+
+a <- c(2,3,4,10)
+b <- c(5,7,4,9)
+print(a>=b)
+```
+
+
+# Logical Operators
+
+# AND operator
+```{r}
+# AND operator
+
+a <- c(3,9,5)
+b <- c(5,6,7)
+
+print(a>5 & b>5)
+```
+
+
+# OR operator
+
+```{r}
+# OR operator
+
+a <- c(1,5,3)
+b <- c(4,5,6)
+
+print(a<5 | b>5)
+
+```
+
+
+# Logical NOT ( ! )
+
+```{r}
+# logical not
+
+a <- c(3,4,5)
+
+print(!(a>3))
+```
+
+
+# Data Frame
+
+* table with rows and columns.
+* each column contains values of one variable
+* each row contains set of values from each column
+
+```{r}
+head(mtcars)
+```
+
+
+# lets Create dataframe
+
+You can create a dataframe using different type of vector in r using data.frame()
+
+R by default converts string tof actor while reading or creating dataframe, to keep string as string we use stringsAsFactors.
+
+
+```{r}
+data <- data.frame(id = c(1:5),
+                   name = c("Richa","Deepak","Manisha","Ryan","Ram"),
+                   age = c(23,25,45,30,57),
+                   gender=as.factor(c("female","male","female","male","male")),
+                   stringsAsFactors = FALSE)
+```
+
+```{r}
+data
+```
+
+# Get the Structure of the Data Frame
+```{r}
+# Get the structure of the data frame.
+str(data)
+```
+
+# Summary of Data in Dataframe
+
+```{r}
+# Print the summary
+summary(data)
+```
+
+# Extract Data From DataFrame
+
+## head
+* head() extract first 6 rows of the dataframe
+
+```{r}
+head(mtcars)
+```
+
+```{r}
+head(mtcars,4)
+```
+
+
+## tail
+
+* tail() extract last 6 rows of the dataframe
+
+```{r}
+tail(mtcars)
+```
+
+
+```{r}
+tail(mtcars,10)
+```
+
+# Extract Data
+
+* dataframe_name[row_id_from: row_id_to, col_id_from:col_id_to]
+
+## Extract first two rows and first two columns
+
+```{r echo=FALSE}
+# extract first two rows and column
+data[1:2,1:2]
+```
+
+## Extract 2nd row and all columns
+
+```{r}
+data[2,]
+```
+
+## Extract 3rd   row with 2nd and 4th column
+
+```{r}
+data[3,c(2,4)]
+```
+
+
+
+## Extract 2nd  and 4th  row with 2nd,3rd and 4th  column
+
+```{r}
+# extract 3rd and 5th row with 2nd and 4th column
+data[c(2,4),c(3,4)]
+```
+
+# your turn 4
+
+* Extract name and age column
+* Extract 2nd row  
+* Extract 3rd row and name, gender,age column
+
+## Extract name and age column
+```{r}
+
+```
+
+## Extract 2nd row  
+```{r}
+
+```
+
+## Extract 3rd row and name, gender,age column
+
+```{r}
+
+```
+
+
+
+# Add Column
+
+```{r}
+#Add the 'address' column
+data$address <- c("butwal","kathmandu","brigunj","illam","karnali")
+data
+```
+
+# Your Turn 5
+
+*  Add blood_group column to dataframe
+
+```{r your turn 3}
+data$blood_group <- c()
+data
+```
+
+# Add Row
+
+```{r}
+# Create second data frame
+newdata <- data.frame(id = c(6:8),
+                   name = as.character(c("Deepika","Manish","Brion")),
+                   age = c(33,15,40),
+                   gender=as.factor(c("female","male","male")),
+                   address=c("patan","dharan","butwal"),
+                   stringsAsFactors = FALSE)
+# connect two dataframe with rows
+final_data <- rbind(data,newdata)
+```
+
+```{r}
+final_data
+```
+
+# Merge Two dataframe
+
+* Connect two dataframe with different columns using a .green[key]
+* .merge() is used tp merge the two dataframe
+* must have a common column in two dataframe
+
+
+```{r}
+prof_data <- data.frame(
+                   name  = as.character(c("Deepika","Manish","Brion","Richa","Deepak","Manisha","Ryan","Ram")),
+                   phone  = c(9129345550,9129365570,9129346789,9129343457,9129342344,9129343451,9129344670,9129345650),
+                   
+profession =  as.character(c("Doctor","Nurse","Driver","Scientist","Computer Technician","Teacher","Student","Lawyer")),
+                   stringsAsFactors = FALSE)
+```
+
+
+```{r}
+# merge prof_data and final_dat using name by key
+merge(prof_data,final_data, by = 'name')
+```
+
+
+# Rename Column
+
+* select column with its name and replace with new name
+* name() function gives the name of the dataframe column
+```{r}
+names(final_data)[names(final_data)=="name"] <- "first_name"
+final_data
+```
+
+
+# Function
+
+* set of statements organized together to perform a specific task
+* R has a large number of in-built functions
+
+```{r}
+# function for adding number
+add_me <- function(num1,num2){
+  sum <- num1 + num2
+  return(sum)
+}
+```
+
+```{r}
+add_me(99,123)
+```
+
+
+# Built In Function
+
+```{r}
+# Create a sequence of numbers from 32 to 44.
+print(seq(32,44))
+
+# Find mean of numbers from 25 to 82.
+print(mean(25:82))
+
+# Find sum of numbers frm 41 to 68.
+print(sum(41:68))
+```
+
+# Package
+
+ * Packages are a collection of R functions, complied code and sample data
+ * Stored under a directory called "library" in the R environment
+ * R installs a set of packages during installation 
+ * Comprehensive R Archive Network" (CRAN) has collection of package
+ 
+ 
+#  Asking for Help
+
+* ? and .help() function  is used to ask help
+* help provides details  about  r objects like function, data, package.
+
+```{r}
+# asking help about the mean() function
+?mean
+```
+
+```{r}
+# asking help about the mtcars datasets
+?mtcars
+```
+
+```{r}
+# asking help about the dplyr package
+?dplyr
+```
+

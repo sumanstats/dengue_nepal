@@ -1,0 +1,152 @@
+---
+title: "Data Transformation"
+author: "RNepal"
+date: "9/16/2019"
+output: html_document
+---
+
+
+<!-- This file is provided in Data Analysis with R bootcamp by R Nepal (www.rugnepal.org) -->
+
+## Load library
+
+```{r setup, include = FALSE}
+library(haven)
+library(readxl)
+library(readr)
+library(writexl)
+```
+
+## Load Data
+
+```{r}
+library(readr)
+
+gapminder <- read_csv("./data/gapminder.csv")
+
+gapminder
+
+```
+
+## Select - Variables
+
+```{r}
+## %>%  <------- Ctrl + Alt + m  (Keyboard shortcut)
+
+country_gdp_year <- gapminder %>% select(year, country, gdpPercap)
+  
+  
+# Displays data, so don't remove them below as well
+country_gdp_year
+```
+
+# Filter by value
+
+```{r}
+gapminder_asia <- gapminder %>%
+  filter(continent == "Asia") 
+  
+
+gapminder_asia
+```
+
+
+## Your Turn - 01
+
+Display country-wise, annual life expectancy of Europe.
+
+```{r}
+lifeexp_year_europe <-  gapminder %>%
+  filter(continent=="Europe") %>% select(year,country, lifeExp)
+  
+
+
+# displays data
+lifeexp_year_europe
+```
+
+
+# Mutate - Add New Variables
+
+```{r}
+gapminder_total_gdp <- gapminder %>%
+  mutate(gdp = gdpPercap*pop )
+
+# displays data 
+gapminder_total_gdp
+```
+
+# Your Turn - 02
+
+Find each countries in Asia with life expectancy in 2007 and rank of country's life expectancy.
+
+```{r}
+library(dplyr)
+asia_lifeExp <-  gapminder %>% filter(continent=="Asia", year==2007) %>%
+  select(country, lifeExp) %>% mutate(rank=min_rank(lifeExp))
+   
+  
+
+asia_lifeExp  
+```
+
+# Group By - One or more variable
+
+```{r}
+gapminder_group_by <- gapminder %>%
+  filter(year == 2007 ) %>%
+  group_by(continent)
+  
+gapminder_group_by
+```
+
+# Arrange - Ascending Order
+
+```{r}
+gapminder_asc <- gapminder %>%
+  filter(year == 2007 ) %>%
+  select(country, pop) %>% 
+  arrange(pop)
+  
+  
+
+gapminder_asc 
+```
+
+# Arrange - Descending Order
+
+```{r}
+gapminder_desc <- gapminder %>%
+  filter(year == 2007 ) %>%
+  select(country, pop) %>% 
+  arrange(desc(pop))
+  
+  
+# displays data
+gapminder_desc 
+```
+
+
+# Your Turn - 03
+
+Find countries in Asia with low ranked gdpPercap in 1992
+
+```{r}
+asia_gdpPercap_1992 <- gapminder %>% filter(continent=="Asia", year==1992) %>% 
+  select(country, gdpPercap) %>% 
+  mutate(Rank=min_rank(gdpPercap)) %>% arrange(Rank)
+  
+  
+asia_gdpPercap_1992 
+```
+
+# Summarize Data
+
+```{r}
+gampinder_sum <- gapminder %>% filter(year==2007) %>% group_by(continent) %>% summarise(MeanLifeExp=mean(lifeExp), gdp=mean(gdpPercap))
+
+  
+gampinder_sum
+```
+
+

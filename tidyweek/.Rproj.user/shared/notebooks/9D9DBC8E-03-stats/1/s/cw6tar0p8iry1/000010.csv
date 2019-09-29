@@ -1,0 +1,3 @@
+"0","library(broom)"
+"0","library(knitr)"
+"0","chisq_chest_heart$observed %>% kable()"

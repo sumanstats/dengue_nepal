@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel,aes(x = factor(1), "
+"0","                        fill = binary))+"
+"0","  geom_bar(width = 1)"

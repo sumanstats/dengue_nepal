@@ -1,0 +1,6 @@
+"0",""
+"0","library(readxl)"
+"0",""
+"0","excel_data <- read_excel(""./data/plastics.xls"")"
+"0",""
+"0","excel_data"

@@ -1,0 +1,4 @@
+"0","ggplot(bechdel, aes(x = clean_test , "
+"0","                  y = domgross)) +"
+"0","  geom_col(aes(fill = clean_test),"
+"0","           width = 0.4)"

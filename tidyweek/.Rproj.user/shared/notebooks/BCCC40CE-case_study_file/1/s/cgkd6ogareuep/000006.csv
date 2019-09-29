@@ -1,0 +1,7 @@
+"0","mapdf_purrr %>% filter(year==2070 & cases!=0) %>% group_by(Province) %>% summarise(cases_p=sum(cases)) %>% "
+"0","  ggplot()+ geom_col(aes(x=reorder(Province,-cases_p), y=cases_p,fill=Province))+"
+"0","  scale_fill_brewer(palette = ""Set1"")+"
+"0","  geom_label(aes(x=Province, y=cases_p, label=Province))+"
+"0","  labs(title = ""Highest cases of Dengue by Province in 2070"","
+"0","       x= ""Districts"","
+"0","       y=""No. of cases"")+theme_minimal()+theme(legend.position = ""none"")"

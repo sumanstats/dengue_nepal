@@ -1,0 +1,8 @@
+"0","gapminder_asc <- gapminder %>%"
+"0","  filter(year == 2007 ) %>%"
+"0","  select(country, pop) %>% "
+"0","  arrange(pop)"
+"0","  "
+"0","  "
+"0",""
+"0","gapminder_asc "

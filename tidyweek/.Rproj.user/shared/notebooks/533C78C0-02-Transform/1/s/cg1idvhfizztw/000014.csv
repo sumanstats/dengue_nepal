@@ -1,0 +1,7 @@
+"0","lifeexp_year_europe <-  gapminder %>%"
+"0","  filter(continent==""Europe"") %>% select(year,country, lifeExp)"
+"0","  "
+"0",""
+"0",""
+"0","# displays data"
+"0","lifeexp_year_europe"

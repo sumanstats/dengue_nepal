@@ -1,0 +1,20 @@
+"0","bechdel <- read_csv(""./data/bechdel.csv"")"
+"2","Parsed with column specification:
+cols(
+  year = [32mcol_double()[39m,
+  imdb = [31mcol_character()[39m,
+  title = [31mcol_character()[39m,
+  test = [31mcol_character()[39m,
+  clean_test = [31mcol_character()[39m,
+  binary = [31mcol_character()[39m,
+  budget = [32mcol_double()[39m,
+  domgross = [32mcol_double()[39m,
+  intgross = [32mcol_double()[39m,
+  code = [31mcol_character()[39m,
+  budget_2013 = [32mcol_double()[39m,
+  domgross_2013 = [32mcol_double()[39m,
+  intgross_2013 = [32mcol_double()[39m,
+  period_code = [32mcol_double()[39m,
+  decade_code = [32mcol_double()[39m
+)
+"

@@ -1,0 +1,2 @@
+"0","# extract first two rows and column"
+"0","data[1:2,1:2]"

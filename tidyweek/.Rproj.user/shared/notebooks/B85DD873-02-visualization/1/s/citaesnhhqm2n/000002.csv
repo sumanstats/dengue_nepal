@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel) +"
+"0"," geom_point(mapping = aes(x = budget, y = intgross, color = clean_test)) +"
+"0","    theme_bw()"

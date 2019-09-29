@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel, aes(x = clean_test)) +"
+"0","  geom_bar(aes(fill = clean_test)) +"
+"0","  scale_fill_brewer(palette = ""Pastel1"" )"

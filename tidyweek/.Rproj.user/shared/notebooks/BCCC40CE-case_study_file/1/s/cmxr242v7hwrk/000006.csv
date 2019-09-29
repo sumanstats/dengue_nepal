@@ -1,0 +1,7 @@
+"0","mapdf_purrr %>% pivot_wider(names_from = ""year"", values_from = ""cases"") %>% unnest()"
+"2","Values in `cases` are not uniquely identified; output will contain list-cols.
+* Use `values_fn = list(cases = list)` to suppress this warning.
+* Use `values_fn = list(cases = length)` to identify where the duplicates arise
+* Use `values_fn = list(cases = summary_fun)` to summarise duplicates"
+"2","`cols` is now required.
+Please use `cols = c(`2070`, `2071`, `2072`, `2073`, `2074`, `2075`, `2076`)`"

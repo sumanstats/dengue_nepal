@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel) +"
+"0","  geom_point(aes(x = domgross,"
+"0","                             y = intgross))"

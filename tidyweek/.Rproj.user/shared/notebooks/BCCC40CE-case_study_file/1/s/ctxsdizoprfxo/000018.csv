@@ -1,0 +1,8 @@
+"0",""
+"0","highest_cases_2070 %>% "
+"0","  ggplot(aes(x=reorder(District,-cases), y=cases,fill=Province))+"
+"0","  geom_bar(stat=""identity"")+"
+"0","  labs(title = ""Highest cases of Dengue in 2070"","
+"0","       x= ""Districts"","
+"0","       y=""No. of cases"")+theme_minimal()+coord_flip()"
+"0",""

@@ -1,0 +1,6 @@
+"0","ggplot(data = bechdel,aes(x = clean_test))+"
+"0","  geom_bar(aes(fill = clean_test)) +"
+"0","  labs(title = ""Bar plots"", "
+"0","         x = ""Clean_test"", "
+"0","         y = ""Count"","
+"0","         caption = ""Data source: fivethirtyeight"")"

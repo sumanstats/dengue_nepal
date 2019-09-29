@@ -1,0 +1,7 @@
+"0","# data frame with 4 cols, 3 rows"
+"0","data <- data.frame(id = c(1, 2), "
+"0","                   x = c(""a"", ""b""),"
+"0","                   y = c(""c"", ""d""),"
+"0","                   z =  c(""e"", ""f""))"
+"0",""
+"0","data"

@@ -1,0 +1,2 @@
+"0","lang <- readRDS(""./data/language.rds"")"
+"0","head(lang, 4)"

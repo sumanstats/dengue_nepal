@@ -1,0 +1,2 @@
+"0","cases_p <- names(province_df)[3:9]"
+"0","province_df %>% group_by(Province) %>% summarise_at(cases_p, num_na)"

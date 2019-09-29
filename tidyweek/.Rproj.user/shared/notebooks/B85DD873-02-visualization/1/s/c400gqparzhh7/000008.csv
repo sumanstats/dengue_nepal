@@ -1,0 +1,3 @@
+"0","bechdel %>% count(year)%>%ggplot() +"
+"0"," geom_point(mapping = aes(x = year, y = n),color = ""red"") +"
+"0"," geom_line(mapping = aes(x = year, y = n),color=""green"")"

@@ -1,0 +1,6 @@
+"0","wide <- pivot_wider(long,"
+"0","  names_from = key,"
+"0","  values_from = val"
+"0",")"
+"0",""
+"0","wide"

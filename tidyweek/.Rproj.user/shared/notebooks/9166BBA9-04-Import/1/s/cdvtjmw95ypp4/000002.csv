@@ -1,0 +1,6 @@
+"0","library(haven)"
+"0",""
+"0",""
+"0","stata_data <- read_stata(""./data/food.dta"")"
+"0",""
+"0","stata_data"

@@ -1,0 +1,6 @@
+"0","asia_gdpPercap_1992 <- gapminder %>% filter(continent==""Asia"", year==1992) %>% "
+"0","  select(country, gdpPercap) %>% "
+"0","  mutate(Rank=min_rank(gdpPercap)) %>% arrange(Rank)"
+"0","  "
+"0","  "
+"0","asia_gdpPercap_1992 "

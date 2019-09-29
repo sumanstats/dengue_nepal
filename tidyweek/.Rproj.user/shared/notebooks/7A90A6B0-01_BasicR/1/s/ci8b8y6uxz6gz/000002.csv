@@ -1,0 +1,7 @@
+"0","prof_data <- data.frame("
+"0","                   name  = as.character(c(""Deepika"",""Manish"",""Brion"",""Richa"",""Deepak"",""Manisha"",""Ryan"",""Ram"")),"
+"0","                   phone  = c(9129345550,9129365570,9129346789,9129343457,9129342344,9129343451,9129344670,9129345650),"
+"0","                   "
+"0","profession =  as.character(c(""Doctor"",""Nurse"",""Driver"",""Scientist"",""Computer Technician"",""Teacher"",""Student"",""Lawyer"")),"
+"0","                   stringsAsFactors = FALSE)"
+"0","prof_data"

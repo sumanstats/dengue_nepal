@@ -1,0 +1,3 @@
+"0","ggplot(bechdel, aes(x = binary ,"
+"0","                  y = budget)) +"
+"0","  geom_col(aes(fill = binary), width =0.4 )"

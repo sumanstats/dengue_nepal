@@ -1,0 +1,4 @@
+"0","gampinder_sum <- gapminder %>% filter(year==2007) %>% group_by(continent) %>% summarise(MeanLifeExp=mean(lifeExp), gdp=mean(gdpPercap))"
+"0",""
+"0","  "
+"0","gampinder_sum"

@@ -1,0 +1,6 @@
+"0","ggplot(data = bechdel,aes(x = binary))+"
+"0","    geom_bar(aes(fill = binary)) + "
+"0","    labs(title = ""Graph title"", "
+"0","         x = ""X-axis"", "
+"0","         y = ""Y-axis"","
+"0","         caption = ""data source: xyz"")"

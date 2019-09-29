@@ -1,0 +1,5 @@
+"0","ggplot(data = bechdel) +"
+"0","  geom_point(aes("
+"0","    x = budget,"
+"0","    y = domgross),"
+"0","    alpha = 0.3,color=""red"")"

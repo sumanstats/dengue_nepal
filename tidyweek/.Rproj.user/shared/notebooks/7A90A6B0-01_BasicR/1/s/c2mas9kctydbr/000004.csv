@@ -1,0 +1,2 @@
+"0","# merge prof_data and final_dat using name by key"
+"0","merge(prof_data,final_data, by = 'name')"

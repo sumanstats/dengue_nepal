@@ -1,0 +1,116 @@
+--
+title: "Import Data"
+author: "RNepal"
+date: "9/16/2019"
+output: html_document
+---
+
+<!-- This file is provided in Data Analysis with R bootcamp by R Nepal (www.rugnepal.org) -->
+
+
+```{r setup, include = FALSE}
+library(tidyverse)
+
+```
+
+
+#Read RDA data
+
+```{r}
+load("./data/spirantization.rda")
+head(spirantization,4)
+```
+
+
+#Read RDS data
+
+```{r}
+lang <- readRDS("./data/language.rds")
+head(lang, 4)
+```
+
+## Read CSV File
+
+
+```{r}
+library(readr)
+
+csv_data <- read_csv("./data/suicide.csv")
+
+csv_data
+```
+
+
+## Read Excel Data
+
+
+```{r}
+
+library(readxl)
+
+excel_data <- read_excel("./data/plastics.xls")
+
+excel_data
+```
+
+
+## Read SPSS Data
+
+
+```{r}
+library(haven)
+
+spss_data <- read_sav("./data/bodyfat.sav")
+
+spss_data
+```
+
+
+## Read Stata Files
+
+
+```{r}
+library(haven)
+
+
+stata_data <- read_stata("./data/food.dta")
+
+stata_data
+```
+
+## Write Data from R
+
+
+```{r}
+library(readr)
+library(writexl)
+library(haven)
+```
+
+
+
+```{r}
+women
+```
+
+
+```{r}
+save(   women   , file = "./data/women.rda")
+saveRDS(  women  , "./data/women.rds")
+write_csv(  women  , "./data/women.xls")
+write_sav(  women   , "./data/women.sav")
+write_dta(   women   , "./data/women.dta")
+```
+
+
+
+***
+
+# Take Aways
+
+Package                   | Reads / Writes
+------------------------- | -----------------------------------
+readr                     | most flat files (.csv, .tsv, etc.)
+readxl                    | excel files (.xls, .xlsx)
+haven                     | SPSS, Stata, and SAS files
+writexl                   | write excel files (.xls, .xlsx)

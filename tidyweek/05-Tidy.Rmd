@@ -1,0 +1,139 @@
+---
+title: "Tidy Data"
+author: "RNepal"
+date: "9/16/2019"
+output: html_document
+---
+
+
+<!-- This file is provided in Data Analysis with R bootcamp by R Nepal (www.rugnepal.org) -->
+
+# Tidy Data Principle
+
+
+1. Each variable is in its own column 
+2. Each observation is in its own row
+3. Each value is in its own cell
+
+# Creating a Data Frame
+
+```{r}
+# data frame with 4 cols, 3 rows
+data <- data.frame(id = c(1, 2), 
+                   x = c("a", "b"),
+                   y = c("c", "d"),
+                   z =  c("e", "f"))
+
+data
+```
+
+# Pivoting - Wide to Long
+
+```{r}
+library(tidyr)
+
+long <- pivot_longer(data,
+  cols = 2:4,
+  names_to = "key",
+  values_to = "val"
+)
+
+wide <- pivot_wider(long,
+  names_from = key,
+  values_from = val
+)
+
+
+long
+wide
+
+```
+
+
+# Pivoting - Long to Wide
+
+```{r}
+wide <- pivot_wider(long,
+  names_from = key,
+  values_from = val
+)
+
+wide
+```
+
+# table4a - Reshaping Data
+
+```{r}
+table4a
+```
+
+
+```{r}
+
+table_a <- table4a %>% 
+  pivot_longer(cols = 2:3, 
+              names_to = "year", 
+              values_to = "cases")
+
+table_a
+```
+
+# Your Turn - 01
+
+table4b - Reshape data into tidy format
+
+```{r}
+table4b
+```
+
+
+```{r}
+table_b <- table4b %>% pivot_longer(cols=2:3,
+                                    names_to = "year",
+                                    values_to = "population")
+
+
+
+table_b
+```
+
+
+
+
+
+
+# Merging Data
+
+```{r}
+df <- merge(  table_a   , table_b     )
+
+
+df
+```
+
+
+
+```{r}
+names(df)
+```
+
+
+
+```{r}
+df %>% filter(year==2000) %>% mutate(rate=cases/population) %>% summarise(avg_rate=mean(rate))
+```
+
+
+***
+
+# Take Aways
+
+Data comes in many formats but R prefers just one: _tidy data_.
+
+A data set is tidy if and only if:
+
+1. Every variable is in its own column
+2. Every observation is in its own row
+3. Every value is in its own cell (which follows from the above)
+
+What is a variable and an observation may depend on your immediate goal.

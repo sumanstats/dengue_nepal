@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel,aes(x = test))+"
+"0","  geom_bar(aes(fill = test)) +"
+"0","    theme(axis.text.x = element_text(angle = 45))"

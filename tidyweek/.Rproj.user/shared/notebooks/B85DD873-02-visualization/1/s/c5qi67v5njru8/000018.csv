@@ -1,0 +1,2 @@
+"0","ggplot(data = bechdel,aes(x = clean_test)) +"
+"0","  geom_bar(aes(fill = clean_test)) + labs(title=""Hello world chart"", x=""clean_test"", y=""count"")+theme_classic()"

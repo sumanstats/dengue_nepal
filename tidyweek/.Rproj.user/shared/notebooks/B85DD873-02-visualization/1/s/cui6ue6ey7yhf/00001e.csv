@@ -1,0 +1,4 @@
+"0","ggplot(data = bechdel) +"
+"0","  geom_bar(aes(x = clean_test,"
+"0","               fill = clean_test)) +"
+"0","  theme(legend.position=""top"")"

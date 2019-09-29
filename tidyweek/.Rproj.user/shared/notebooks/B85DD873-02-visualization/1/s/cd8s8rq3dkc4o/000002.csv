@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel) +"
+"0","  geom_boxplot(aes(x = clean_test,"
+"0","                   y =  budget))"

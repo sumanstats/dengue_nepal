@@ -1,0 +1,7 @@
+"0","library(tidyverse)"
+"0",""
+"0","np_province <- nepal_province %>% "
+"0","  pivot_longer(cols = 2:8, "
+"0","               names_to = ""year"", "
+"0","               values_to = ""cases"")"
+"0","np_province"

@@ -1,0 +1,2 @@
+"0","data$blood_group <- as.factor(c(""A"", ""B"",""AB"",""O"", ""A""))"
+"0","data"

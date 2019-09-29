@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel) +"
+"0","  geom_bar(mapping = aes(x = clean_test,"
+"0","                         fill = clean_test))"

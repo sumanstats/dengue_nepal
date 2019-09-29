@@ -1,0 +1,5 @@
+"0","data <- data.frame(id = c(1:5),"
+"0","                   name = c(""Richa"",""Deepak"",""Manisha"",""Ryan"",""Ram""),"
+"0","                   age = c(23,25,45,30,57),"
+"0","                   gender=as.factor(c(""female"",""male"",""female"",""male"",""male"")),"
+"0","                   stringsAsFactors = FALSE)"

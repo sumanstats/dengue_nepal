@@ -1,0 +1,4 @@
+"0","ggplot(data = bechdel,aes(x = factor(1), "
+"0","                        fill = binary))+"
+"0","  geom_bar(width = 1) +"
+"0","  coord_polar(""y"")+theme_void()"

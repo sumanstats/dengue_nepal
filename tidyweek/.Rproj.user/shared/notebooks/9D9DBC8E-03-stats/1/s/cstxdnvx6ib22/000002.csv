@@ -1,0 +1,6 @@
+"0","# correlation between serum_cholesterol and age"
+"0","cor(heart$serum_cholesterol, heart$age)"
+"1","[1]"
+"1"," 0.2362106"
+"1","
+"

@@ -1,0 +1,1 @@
+"0","df %>% filter(year==2000) %>% mutate(rate=cases/population) %>% summarise(avg_rate=mean(rate))"

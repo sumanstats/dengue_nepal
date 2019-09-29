@@ -1,0 +1,4 @@
+"0","bechdel %>% count(clean_test) %>% ggplot() +"
+"0","    geom_col(aes(x=clean_test,y=n,fill= clean_test)) +"
+"0","    geom_label(aes(x= clean_test, y = n, label = n)) +"
+"0","    labs(title = ""Barplot of clean test"", y = ""Count"")"

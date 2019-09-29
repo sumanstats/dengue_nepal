@@ -1,0 +1,3 @@
+"0","ggplot(data = bechdel, aes(x = clean_test)) +"
+"0","  geom_bar(aes(fill = clean_test)) +"
+"0","  scale_fill_manual(values = c(""#55DDE0"", ""#33658A"", ""#2F4858"", ""#F6AE2D"", ""#F26419""))"

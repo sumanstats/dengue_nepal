@@ -1,0 +1,695 @@
+---
+title: "Visualization with ggplot2"
+author: "RNepal"
+date: "9/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Grammar of Graphics
+
+
+
+ ggplot2 is a data visualization tool based on the grammar of graphics and using different functions.
+
+
+## "The simple graph has brought more information to the data analyst's mind than any other device." - John Tuckey
+
+# Setup
+
+```{r setup}
+library(ggplot2)
+library(readr)
+library(dplyr)
+```
+
+# Data
+```{r}
+bechdel <- read_csv("./data/bechdel.csv")
+```
+
+```{r}
+head(bechdel)
+```
+
+
+The raw data behind the story "The Dollar-And-Cents Case Against Hollywood's Exclusion of Women" from the fivethirtyeight .
+There are 15 columns in the dataset and  are described in the section below.
+
+
+* year :Year of release
+
+* imdb :Text to construct IMDB url. Ex: https://www.imdb.com/title/tt1711425
+
+* title :Movie title
+
+* test :bechdel test result (detailed, with discrepancies indicated)
+
+* clean_test : bechdel test result (detailed): ok = passes test, dubious, men = women only talk about men, notalk = women don't talk to each other, nowomen = fewer than two women
+
+* binary :Bechdel Test PASS vs FAIL binary
+
+* budget :Film budget
+
+
+
+* domgross :Domestic (US) gross
+
+* intgross :Total International (i.e., worldwide) gross
+
+* code :Bechdel Code
+
+* budget_2013 :Budget in 2013 inflation adjusted dollars
+
+* domgross_2013 :Domestic gross (US) in 2013 inflation adjusted dollars
+
+* intgross_2013 :Total International (i.e., worldwide) gross in 2013 inflation adjusted dollars
+
+* period_code
+* decade_code
+
+
+
+# Your Turn 1
+
+```{r}
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget,
+                          y = domgross))
+```
+
+# ggplot 2 Template
+
+##Format of ggplot2 
+ggplot(data = <DATA>) +
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+
+
+# Aesthetics
+
+* something we can see in graph
+* X and Y axis, color, size ,shape of the graph
+
+## color 
+```{r}
+# color is set to clean_test
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget, 
+                          y = domgross, 
+                          color = clean_test))
+```
+
+## shape
+```{r}
+# shape is set to clean_test
+ggplot(bechdel) +
+  geom_point(aes(x = budget,
+                 y = domgross,
+                 shape = clean_test))
+```
+
+# Your Turn 2
+
+* Experiment adding color, size , alpha , and shape aesthetics to your graph
+
+* How do aesthetics behave different when mapped to discrete and continous variable?
+
+* What happens when you use more than one aesthetic?
+
+```{r}
+# color aesthetic
+ggplot(data = bechdel) +
+    geom_point(mapping = aes(x = budget , y = domgross, color = clean_test))
+
+```
+
+
+```{r}
+# shape aesthetic
+ggplot( data = bechdel) +
+    geom_point(mapping = aes(x = budget, y = domgross, shape = clean_test))
+```
+
+
+```{r}
+# alpha aesthetic 
+ggplot( data = bechdel) +
+    geom_point(mapping = aes(x = budget, y = domgross, color = clean_test), alpha = 0.2)
+```
+
+
+
+
+
+```{r}
+ggplot(data = bechdel) +
+  geom_point(mapping = aes(x = budget,
+                           y = intgross),
+             color ="red", alpha=0.2)
+```
+
+# Geoms
+
+* functions that define the geometric or visual  object  of the graphs.
+
+* used to define different type of plots like bar charts, boxplots, line charts and many more.
+
+
+Geom | Description
+--- | ---
+geom_point() | creates scatterplot
+geom_boxplot() | creates boxplot
+geom_histogram() | creates histogram
+geom_density() | creates density plot
+geom_bar() | creates barplot
+geom_line()| creates lineplot
+
+]
+
+## Scatterplot
+
+* Scatterplot is used to define the relationship between two variable 
+* geom_point() geom is used for scatterplot.
+
+```{r}
+ggplot(data = bechdel) +
+  geom_point(aes(
+    x = budget,
+    y = domgross),
+    alpha = 0.3,color="red")
+```
+
+## Bubble Chart
+
+
+* bubblechart is same like scatterplot with points being bubbles
+* bubblechart is defined using geom_point() geoms
+
+
+```{r message=FALSE, warning=FALSE}
+ggplot(data = bechdel) +
+  geom_point(aes(
+    x = budget,
+    y = domgross,
+    size = .001*domgross
+  ),
+    alpha = 0.3,color="red")
+```
+
+## Boxplot
+
+* boxplot can be defined using geom_boxplot() geoms
+
+* used to define .green[quartiles] and find outliers.
+
+```{r}
+ggplot(data = bechdel) +
+  geom_boxplot(aes(x = clean_test,
+                   y =  budget))
+```
+
+
+#Violin plot in ggplot2
+
+```{r}
+ggplot(data = bechdel) +
+  geom_violin(aes(x = clean_test,
+                   y =  budget))
+```
+
+
+# Your turn 3
+
+### scatterplot of the domgross and intgross
+
+```{r}
+ggplot(data = bechdel) +
+  geom_point(aes(x = domgross,
+                             y = intgross))
+```
+
+### boxplot of the domgross VS  binary
+
+```{r}
+ggplot(data = bechdel) +
+  geom_boxplot(aes(x = binary,
+                             y = domgross))
+```
+
+## Histogram
+
+* shows the distribution of data
+* geom_histogram() geom is used.
+
+
+```{r}
+ggplot(data = bechdel) +
+  geom_histogram(aes(x = budget ))
+```
+
+
+* binwidth gives width to bins.
+
+```{r}
+ggplot(data = bechdel) +
+  geom_histogram(aes(x = budget ), 
+                 binwidth = 10000000)
+```
+
+
+
+```{r echo=FALSE}
+ggplot(data = bechdel) +
+  geom_boxplot(mapping = aes(y = intgross ))
+```
+
+
+# Your Turn 4
+
+* Make the Histogarm  of intgross 
+
+```{r echo=FALSE}
+ggplot(data = bechdel) +
+  geom_histogram(mapping = aes(x = intgross ))
+```
+
+## Density Plot
+
+* shows the distribution of data
+* geom_density() geom is used for density plot
+
+```{r}
+ggplot(data = bechdel) +
+  geom_density(mapping = 
+                   aes(x = budget))
+```
+
+# Your Turn 5
+
+* Make the Density  of budget colored by clean_test <br> as shown below
+ 
+```{r}
+ggplot(data = bechdel) +
+  geom_density(mapping = aes(x = budget  ,color = clean_test  ))
+```
+ 
+# Bar Plot
+
+* visualize the count of the values
+* geom_bar() geom is used for barplot.
+
+```{r}
+ggplot(data = bechdel) +
+  geom_bar(aes(x = clean_test))
+```
+
+# Your Turn  6
+
+* Make the bar chart of clean_test and colored by clean_test as shown below.
+
+```{r echo=FALSE}
+ggplot(data = bechdel) +
+  geom_bar(mapping = aes(x = clean_test,
+                         fill = clean_test))
+```
+
+# Coordinate scales
+
+* Arrange the width of the bar
+
+
+```{r}
+ggplot(bechdel, aes(x = clean_test , 
+                  y = domgross)) +
+  geom_col(aes(fill = clean_test),
+           width = 0.4)
+
+
+```
+
+# Your turn 7
+
+*  Add a width adjustment to this plot
+```{r}
+ggplot(bechdel, aes(x = binary ,
+                  y = budget)) +
+  geom_col(aes(fill = binary), width =0.4 )
+```
+
+# Pie Chart
+
+* pie chart is created rotating the barchart
+* pie chart round shaped 
+
+```{r}
+ggplot(data = bechdel,aes(x = factor(1), 
+                        fill = binary))+
+  geom_bar(width = 1)
+```
+
+```{r}
+ggplot(data = bechdel,aes(x = factor(1),
+                        fill = binary))+
+  geom_bar(width = 1) + coord_polar("y")
+```
+
+```{r}
+ggplot(data = bechdel,aes(x = factor(1), 
+                        fill = binary))+
+  geom_bar(width = 1) +
+  coord_polar("y")+theme_void()
+```
+
+
+```{r}
+# create new dataframe
+binary_data <- bechdel %>%
+  count(binary) %>%
+  mutate(percent = (n / sum(n)) * 100)
+ggplot(binary_data, aes(x = "", y = percent, fill = binary)) +
+  geom_bar(width = 1, stat = "identity", color = "white") +
+# convert barplot to polar coordinates     
+  coord_polar("y", start = 0) +
+# add labels 
+  geom_text(aes(label = paste0(round(percent, 2), "%")), position = position_stack(vjust = 0.5), color = "white") +
+# add color scale manually
+  scale_fill_manual(values = c("#55DDE0", "#F6AE2D")) +
+  theme_void()
+```
+
+# Lineplot
+
+```{r}
+bechdel %>% count(year)%>%ggplot() +
+ geom_point(mapping = aes(x = year, y = n)) +
+ geom_line(mapping = aes(x = year, y = n))
+```
+
+
+```{r}
+bechdel %>% count(year)%>%ggplot() +
+ geom_point(mapping = aes(x = year, y = n),color = "red") +
+ geom_line(mapping = aes(x = year, y = n),color="green")
+```
+
+# Title , Axis and caption
+
+* labs() is used to add title,caption etc
+```{r}
+ggplot(data = bechdel,aes(x = binary))+
+    geom_bar(aes(fill = binary)) + 
+    labs(title = "Graph title", 
+         x = "X-axis", 
+         y = "Y-axis",
+         caption = "data source: xyz")
+```
+
+
+# Your Turn 8
+
+* Add  Title,caption to belwo plot 
+
+```{r}
+ggplot(data = bechdel,aes(x = clean_test))+
+  geom_bar(aes(fill = clean_test)) +
+  labs(title = "Bar plots", 
+         x = "Clean_test", 
+         y = "Count",
+         caption = "Data source: fivethirtyeight")
+```
+
+# Change axis tick mark labels
+
+```{r}
+ggplot(data = bechdel,aes(x = test))+
+  geom_bar(aes(fill = test))
+```
+
+
+```{r}
+ggplot(data = bechdel,aes(x = test))+
+  geom_bar(aes(fill = test)) +
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+# Flip the plot
+```{r echo=TRUE}
+ggplot(data = bechdel,aes(x = test))+
+  geom_bar(aes(fill = test)) +coord_flip()
+```
+
+# Your Turn 9
+* Rotate the x axis ticks by 45 degree angle.
+```{r}
+ggplot(data = bechdel,aes(x = test))+
+  geom_bar(aes(fill = test)) +
+    theme(axis.text.x = element_text(angle = 45))
+```
+
+
+# Legend
+
+## Remove legend
+
+```{r}
+ggplot(data = bechdel) +
+  geom_bar(mapping = aes(
+    x = clean_test,
+    fill = clean_test
+  )) +
+  guides(fill = FALSE)
+```
+
+
+# legend position
+
+```{r}
+ggplot(data = bechdel) +
+  geom_bar(aes(x = clean_test,
+               fill = clean_test)) +
+  theme(legend.position="top")
+```
+
+## Change legend title
+
+```{r}
+ggplot(data = bechdel) +
+  geom_bar(mapping = aes(x = clean_test,
+                         fill = clean_test))+
+    labs(fill = "Clean Test", title="Hello plot")
+```
+
+
+# Labels
+
+* geom_text() adds text directly to the plot.
+* geom_label() create a a rectangle behind the text. 
+
+```{r}
+bechdel %>% count(clean_test) %>% ggplot() +
+    geom_col(aes(x=clean_test,y=n,fill= clean_test)) +
+    geom_label(aes(x= clean_test, y = n, label = n)) +
+    labs(title = "Barplot of clean test", y = "Count")
+```
+
+
+# Arrange the barplot
+
+* reorder() arrange the values 
+
+```{r}
+bechdel %>% count(clean_test) %>% ggplot() +
+    geom_col(aes(x=reorder(clean_test,n),y=n,fill= clean_test)) +
+    geom_label(aes(x= clean_test, y = n, label = n)) +
+    labs(title = "Distribution of clean test", y = "Count",x = "")
+```
+
+
+```{r}
+bechdel %>% count(clean_test) %>% ggplot() +
+    geom_col(aes(x=reorder(clean_test,-n),y=n,fill= clean_test)) +
+    geom_label(aes(x= clean_test, y = n, label = n)) +
+    labs(title = "Distribution of clean test", y = "Count",x = "")
+```
+
+
+
+```{r}
+bechdel %>% count(clean_test) %>% ggplot() +
+    geom_col(aes(x=reorder(clean_test,n),y=n,fill= clean_test)) +
+    geom_label(aes(x= clean_test, y = n, label = n)) +
+    labs(title = "Distribution of clean test", y = "Count",x = "")+coord_flip()
+```
+
+
+
+
+```{r}
+bechdel %>% count(clean_test) %>% ggplot() +
+    geom_col(aes(x=reorder(clean_test,-n),y=n,fill= clean_test)) +
+    geom_label(aes(x= clean_test, y = n, label = n)) +
+    labs(title = "Distribution of clean test", y = "Count",x = "")+coord_flip()
+```
+
+
+
+
+# Position
+
+* change the position of the graph plots
+
+```{r}
+bechdel %>% filter(year == c(2013,2012,2011,2010,2009))%>%
+ggplot(aes(x = year)) +
+ geom_bar(aes(fill = binary))
+```
+
+```{r}
+bechdel %>% filter(year == c(2013,2012,2011,2010,2009))%>%
+ggplot(aes(x = year)) +
+ geom_bar(aes(fill = binary), position = 'dodge') 
+```
+
+# Scales
+
+* assign different color palette
+* Enter scale_color_brewer
+
+```{r}
+?scale_color_brewer
+```
+
+
+
+```{r echo=FALSE}
+ggplot(data = bechdel, aes(x = clean_test)) +
+  geom_bar(aes(fill = clean_test)) +
+  scale_fill_brewer(palette = "Set2")
+```
+
+
+
+
+```{r}
+ggplot(data = bechdel, aes(x = clean_test)) +
+  geom_bar(aes(fill = clean_test)) +
+  scale_fill_brewer(palette = "Set1")
+```
+
+# Your turn 8
+
+*  Pratice with different color palette 
+
+```{r}
+ggplot(data = bechdel, aes(x = clean_test)) +
+  geom_bar(aes(fill = clean_test)) +
+  scale_fill_brewer(palette = "Pastel1" )
+```
+
+# Add color manually
+
+```{r}
+ggplot(data = bechdel, aes(x = clean_test)) +
+  geom_bar(aes(fill = clean_test)) +
+  scale_fill_manual(values = c("#55DDE0", "#33658A", "#2F4858", "#F6AE2D", "#F26419"))
+```
+
+# Facets
+
+* Layout panel for the graphs
+* facet_wrap() & facet_grid()
+
+
+```{r message=FALSE, warning=FALSE}
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget, y = domgross, color = clean_test))
+```
+
+```{r}
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget, y = domgross, color = clean_test)) +
+ facet_wrap(~clean_test)
+```
+
+
+```{r}
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget, y = domgross, color = clean_test)) +
+ facet_grid(period_code ~ clean_test)+theme(axis.text.x = element_text(angle=90))
+```
+
+# Themes
+
+### theme_bw()
+
+```{r echo=TRUE}
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget, y = intgross, color = clean_test)) +
+    theme_bw()
+```
+
+
+### theme_classic()
+
+```{r echo=TRUE}
+ggplot(data = bechdel) +
+ geom_point(mapping = aes(x = budget, y = intgross, color = clean_test))+theme_classic()
+```
+
+
+# Your turn 9
+
+* Try different theme for this graph
+
+```{r echo=TRUE, eval=FALSE,include=TRUE}
+ggplot(data = bechdel,aes(x = clean_test)) +
+  geom_bar(aes(fill = clean_test)) + labs(title="Hello world chart", x="clean_test", y="count")+theme_classic()
+```
+
+
+#  Saving plots
+
+* ggsave() is used to save plot.
+
+```{r}
+# assign the ggplot graph to myplot variable
+
+myplot <- bechdel %>% count(clean_test) %>% ggplot() +
+# plot barplot
+    geom_col(aes(x=reorder(clean_test,n),y=n,fill= clean_test)) +
+# adding labels to plot
+    geom_label(aes(x= clean_test, y = n, label = n)) +
+# adding title and edit xaxis and y axis
+    labs(title = "Distribution of clean test", y = "Count", x= "",fill="Clean Test")+
+    scale_fill_brewer(palette = "Set1") +
+# use theme minimal
+    theme_classic()
+myplot
+```
+
+
+```{r}
+myplot <- bechdel %>% count(clean_test) %>% ggplot() +
+# plot barplot
+    geom_col(aes(x=reorder(clean_test,n),y=n,fill= clean_test)) +
+# adding labels to plot
+    geom_label(aes(x= clean_test, y = n, label = paste0(round(n/sum(n)*100,2),"%") )) +
+# adding title and edit xaxis and y axis
+    labs(title = "Distribution of clean test", y = "Count", x= "",fill="Clean Test")+
+    scale_fill_brewer(palette = "Set2") +
+# use theme minimal
+    theme_classic() + scale_y_continuous(expand = c(0, 0),limits = c(0,850))
+myplot
+```
+
+
+
+```{r}
+# saves the plot to working directory
+ggsave("myplot.png", plot = myplot , width =  6, height = 6, units = "in", dpi = "retina")
+```
+
